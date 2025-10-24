@@ -13,7 +13,6 @@ export default {
     extend: {
       fontFamily: {
         sans: [
-          "PP Neue Montreal",
           "SF Pro",
           "Noto Sans",
           "Helvetica Neue",
@@ -22,12 +21,12 @@ export default {
           "segoe ui",
           "sans-serif",
         ],
-        serif: ["PP Editorial New", "Georgia", "Baskerville", "serif"],
+        serif: ["Georgia", "Baskerville", "serif"],
       },
       fontWeight: {
-        book: "400", // PP Neue Montreal Book (default)
-        medium: "500", // PP Neue Montreal Medium
-        bold: "700", // PP Neue Montreal Bold
+        book: "400",
+        medium: "500",
+        bold: "700",
       },
       boxShadow: {
         hover: "0 8px 30px rgb(0,0,0,0.12)",

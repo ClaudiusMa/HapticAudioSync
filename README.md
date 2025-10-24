@@ -1,6 +1,6 @@
 # HapticAudioSync
 
-A web-based visualizer for AHAP (Apple Haptic Audio Pattern) haptic patterns. Visualize and analyze haptic intensity and sharpness curves in real-time.
+A comprehensive web-based visualizer for AHAP (Apple Haptic Audio Pattern) haptic patterns and audio waveforms. Analyze haptic intensity and sharpness curves alongside audio amplitude data in a unified interface.
 
 ## 🚀 Live Demo
 
@@ -8,12 +8,22 @@ A web-based visualizer for AHAP (Apple Haptic Audio Pattern) haptic patterns. Vi
 
 ## ✨ Features
 
+### Haptic Visualization
 - **Real-time Visualization**: Render AHAP-like JSON patterns with interactive charts
 - **Dual Curve Display**: Visualize both Intensity and Sharpness envelopes over time
-- **Analytics Dashboard**: View key metrics including duration, peak intensity, ramp times, and more
-- **CSV Export**: Download curve data for further analysis
+- **Analytics Dashboard**: View key metrics including duration, peak intensity, ramp times, plateau duration, intensity area, and sharpness delta
+- **CSV Export**: Download haptic curve data for further analysis
+
+### Audio Visualization
+- **WAV File Support**: Upload and process .wav audio files
+- **Waveform Display**: Visualize audio amplitude over time
+- **Audio Analytics**: View duration, sample rate, peak amplitude, RMS amplitude, and total samples
+- **CSV Export**: Download audio waveform data for analysis
+
+### General
 - **TypeScript**: Fully typed for better development experience
 - **Modern UI**: Built with Tailwind CSS and shadcn/ui components
+- **Smooth Animations**: Enhanced UX with Framer Motion
 
 ## 🛠️ Tech Stack
 
@@ -24,6 +34,8 @@ A web-based visualizer for AHAP (Apple Haptic Audio Pattern) haptic patterns. Vi
 - **shadcn/ui** - Re-usable component library
 - **Recharts** - Chart visualization library
 - **Framer Motion** - Animation library
+- **Lucide React** - Icon library
+- **Web Audio API** - Audio file processing
 
 ## 📦 Installation
 
@@ -56,14 +68,24 @@ The development server will start at `http://localhost:5173`
 
 ## 📝 Usage
 
-1. Paste an AHAP-like JSON pattern into the text area
-2. The visualizer will automatically parse and render the curves
-3. View analytics metrics below the input
-4. Download the sampled data as CSV for further analysis
+### Haptic Pattern Visualization
 
-### Expected JSON Format
+1. Paste an AHAP-like JSON pattern into the text area (a default pattern is pre-loaded)
+2. The visualizer will automatically parse and render the intensity and sharpness curves
+3. View analytics metrics including duration, peak intensity, ramp times, and more
+4. Click "Download CSV" to export the sampled haptic data
+5. Use "Reset" to restore the default haptic pattern
 
-The tool expects JSON patterns with the following structure:
+### Audio Waveform Visualization
+
+1. Click "Choose WAV File" to upload a .wav audio file
+2. The tool will process the audio and display the waveform
+3. View audio metrics including duration, sample rate, peak amplitude, and RMS amplitude
+4. Click "Download Audio CSV" to export the waveform data
+
+### Expected Haptic JSON Format
+
+The tool expects AHAP-like JSON patterns with `ParameterCurve` entries using `HapticIntensityControl` and `HapticSharpnessControl`:
 
 ```json
 {
@@ -94,18 +116,32 @@ The tool expects JSON patterns with the following structure:
           { "Time": 0.05, "ParameterValue": 0.47 }
         ]
       }
+    },
+    {
+      "ParameterCurve": {
+        "ParameterID": "HapticSharpnessControl",
+        "Time": 0.0,
+        "ParameterCurveControlPoints": [
+          { "Time": 0, "ParameterValue": 0.05 },
+          { "Time": 0.1, "ParameterValue": 0.15 }
+        ]
+      }
     }
   ]
 }
 ```
 
+The visualizer samples 600 points across the effect's duration and interpolates values between control points.
+
 ## 🎨 Customization
 
-The project uses custom font families defined in `tailwind.config.js`:
-- **PP Neue Montreal** - Primary sans-serif font
-- **PP Editorial New** - Serif font
+The project uses a modern design system with:
+- **Font Stack**: SF Pro, Noto Sans, Helvetica Neue, and fallbacks
+- **Color Palette**: Custom colors including indigo for haptics and emerald for audio
+- **Responsive Breakpoints**: Mobile-first design with custom breakpoints
+- **Animations**: Smooth transitions powered by Framer Motion and Tailwind Animate
 
-Add these font files to your project or update the Tailwind config to use alternative fonts.
+You can customize colors, fonts, and other design tokens in `tailwind.config.js`.
 
 ## 📄 License
 
