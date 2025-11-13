@@ -18,7 +18,8 @@ export interface EventParameter {
 export interface HapticEvent {
   Time: number;
   EventType: string;
-  EventDuration: number;
+  EventDuration?: number;
+  EventWaveformPath?: string;
   EventParameters?: EventParameter[];
 }
 
@@ -41,6 +42,13 @@ export interface DataPoint {
   time: number;
   intensity: number;
   sharpness: number;
+}
+
+export interface EventDataPoint {
+  time: number;
+  intensity: number;
+  sharpness: number;
+  eventType: string;
 }
 
 export interface Summary {
